@@ -1,4 +1,4 @@
-package ul.info.digitalwallet.models;
+package ul.info.digitalwallet.models.enumeration;
 
 public enum ERole {
   ROLE_USER,
