@@ -2,7 +2,6 @@ package ul.info.digitalwallet.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ul.info.digitalwallet.models.enumeration.ERole;
-import ul.info.digitalwallet.models.enumeration.Role;
+import ul.info.digitalwallet.models.Role;
 import ul.info.digitalwallet.models.User;
 import ul.info.digitalwallet.payload.request.LoginRequest;
 import ul.info.digitalwallet.payload.request.SignupRequest;
