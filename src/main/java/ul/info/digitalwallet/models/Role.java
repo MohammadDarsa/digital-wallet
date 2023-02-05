@@ -1,7 +1,8 @@
-package ul.info.digitalwallet.models.enumeration;
+package ul.info.digitalwallet.models;
 
 
 import jakarta.persistence.*;
+import ul.info.digitalwallet.models.enumeration.ERole;
 
 @Entity
 @Table(name = "roles")

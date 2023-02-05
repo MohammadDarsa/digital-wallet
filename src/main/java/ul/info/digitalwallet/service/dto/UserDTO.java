@@ -1,7 +1,7 @@
 package ul.info.digitalwallet.service.dto;
 
 import lombok.Data;
-import ul.info.digitalwallet.models.enumeration.Role;
+import ul.info.digitalwallet.models.Role;
 
 import java.util.Set;
 
