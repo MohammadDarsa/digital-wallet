@@ -25,8 +25,8 @@ public class CardService {
         if (c.isPresent()) {
             Card d = c.get();
             return new CardDto(d.getId(), d.getPan(), d.getCvv(), d.getEx_date(), d.getCurrency(), d.getAmount());
-        } else
-            return new CardDto();
+        }
+        return new CardDto();
     }
 
     public CardDto getCard(String pan, String cvv, LocalDate exp) {

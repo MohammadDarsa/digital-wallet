@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ul.info.digitalwallet.models.User;
-import ul.info.digitalwallet.repository.UserRepository;
+import ul.info.digitalwallet.common.models.User;
+import ul.info.digitalwallet.common.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
