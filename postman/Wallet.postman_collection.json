@@ -19,7 +19,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"darsa\",\r\n    \"email\": \"darsa@mail.com\",\r\n    \"password\": \"darsa123\",\r\n    \"role\": [\r\n        \"ROLE_USER\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"username\": \"admin2\",\r\n    \"email\": \"admin2@mail.com\",\r\n    \"password\": \"admintest\",\r\n    \"role\": [\r\n        \"admin\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -41,12 +41,23 @@
 				},
 				{
 					"name": "sign in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('token', pm.response.json().response['accessToken'])"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"darsa\",\r\n    \"password\": \"darsa123\"\r\n}",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admintest\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -67,16 +78,6 @@
 					"response": []
 				}
 			],
-			"auth": {
-				"type": "bearer",
-				"bearer": [
-					{
-						"key": "token",
-						"value": "{{token}}",
-						"type": "string"
-					}
-				]
-			},
 			"event": [
 				{
 					"listen": "prerequest",
@@ -97,8 +98,154 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "currency",
+			"item": [
+				{
+					"name": "Add Currency",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isoName\":\"LBP\",\r\n    \"exchangeValue\":80000.00,\r\n    \"imagePath\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/currency/add-currency",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"currency",
+								"add-currency"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "wallet",
+			"item": [
+				{
+					"name": "get wallet details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/wallet/get-wallet-details",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"wallet",
+								"get-wallet-details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add balance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currency\":\"USB\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/wallet/create-new-balance",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"wallet",
+								"create-new-balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "top up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currency\":\"USD\",\r\n    \"cvv\":\"123\",\r\n    \"exp\":\"24/01\",\r\n    \"pan\":\"1122334455667788\",\r\n    \"amount\":100.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/wallet/top-up",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"wallet",
+								"top-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "transfer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currency\":\"USD\",\r\n    \"referenceId\":\"43758877-503c-471e-be04-7611476ec11e\",\r\n    \"amount\":50.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/wallet/transfer",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"wallet",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
