@@ -17,7 +17,7 @@ public interface BalanceService {
      * @param currency
      * @param user
      */
-    void save(String currency, User user);
+    BalanceDTO save(String currency, User user);
 
     /**
      * Updates a balance.

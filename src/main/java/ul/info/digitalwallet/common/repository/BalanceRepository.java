@@ -15,6 +15,8 @@ import java.util.List;
 public interface BalanceRepository extends JpaRepository<Balance, Long> {
     List<Balance> findByWallet(Wallet wallet);
 
+    boolean existsByCurrency_IsoName(String isoName);
+
     List<Balance> findByWallet_Id(Long id);
 
 }

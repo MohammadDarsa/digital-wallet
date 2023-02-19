@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ul.info.digitalwallet.common.exceptions.BalanceAlreadyExistsException;
 import ul.info.digitalwallet.common.exceptions.CurrencyNotFoundException;
 import ul.info.digitalwallet.common.exceptions.WalletNotFoundException;
 import ul.info.digitalwallet.common.models.Currency;
@@ -42,15 +43,16 @@ public class BalanceServiceImpl implements BalanceService {
     private final CurrencyRepository currencyRepository;
 
     @Override
-    public void save(String isoCode, User user) {
+    public BalanceDTO save(String isoCode, User user) {
         log.debug("Creating a new balance with currency {} for user {}.", isoCode, user.getUsername());
+        if(balanceRepository.existsByCurrency_IsoName(isoCode)) throw new BalanceAlreadyExistsException(isoCode, user.getUsername());
         Balance balance = new Balance();
         Wallet wallet = walletRepository.findByUser(user).orElseThrow(() -> new WalletNotFoundException(user.getUsername()));
         Currency currency = currencyRepository.findByIsoName(isoCode).orElseThrow(() -> new CurrencyNotFoundException(isoCode));
         balance.setAmount(0.0);
         balance.setWallet(wallet);
         balance.setCurrency(currency);
-        balanceRepository.save(balance);
+        return balanceMapper.toDto(balanceRepository.save(balance));
     }
 
     @Override
