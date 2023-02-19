@@ -15,7 +15,7 @@ public interface WalletMapper extends EntityMapper<WalletDTO, Wallet> {
     WalletDTO toDto(Wallet s);
 
     @Named("userId")
-    @BeanMapping(ignoreByDefault = true)
+//    @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     UserDTO toDtoUserId(User user);
 }

@@ -83,4 +83,10 @@ public class TransactionServiceImpl implements TransactionService {
         log.debug("Request to delete Transaction : {}", id);
         transactionRepository.deleteById(id);
     }
+
+    @Override
+    public List<TransactionDTO> findAllByWalletId(Long id) {
+        log.debug("Request to get all Transactions of wallet id: {}", id);
+        return transactionRepository.findByWallet_Id(id).stream().map(transactionMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+    }
 }

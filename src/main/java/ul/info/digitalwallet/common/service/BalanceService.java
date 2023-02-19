@@ -56,4 +56,6 @@ public interface BalanceService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<BalanceDTO> findByWalletId(Long id);
 }

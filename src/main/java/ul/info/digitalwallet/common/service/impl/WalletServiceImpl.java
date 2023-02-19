@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ul.info.digitalwallet.common.exceptions.WalletNotFoundException;
 import ul.info.digitalwallet.common.models.User;
 import ul.info.digitalwallet.common.models.Wallet;
 import ul.info.digitalwallet.common.service.WalletService;
@@ -15,6 +16,7 @@ import ul.info.digitalwallet.common.service.mapper.WalletMapper;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -38,6 +40,7 @@ public class WalletServiceImpl implements WalletService {
     public void save(User user) {
         log.debug("Request to create a new wallet");
         Wallet wallet = new Wallet();
+        wallet.setReferenceId(UUID.randomUUID());
         wallet.setUser(user);
         walletRepository.save(wallet);
     }
@@ -80,9 +83,9 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    public Optional<Wallet> findOne(User user) {
+    public WalletDTO findOne(User user) {
         log.debug("Get wallet by user");
-        return walletRepository.findByUser(user);
+        return walletRepository.findByUser(user).map(walletMapper::toDto).orElseThrow(() -> new WalletNotFoundException(user.getUsername()));
     }
 
     @Override

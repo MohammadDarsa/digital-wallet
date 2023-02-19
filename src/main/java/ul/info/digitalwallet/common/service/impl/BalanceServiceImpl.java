@@ -95,4 +95,10 @@ public class BalanceServiceImpl implements BalanceService {
         log.debug("Request to delete Balance : {}", id);
         balanceRepository.deleteById(id);
     }
+
+    @Override
+    public List<BalanceDTO> findByWalletId(Long id) {
+        log.debug("Request to get all Balances for a wallet of id: {}", id);
+        return balanceRepository.findByWallet_Id(id).stream().map(balanceMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+    }
 }

@@ -15,7 +15,7 @@ public interface TransactionMapper extends EntityMapper<TransactionDTO, Transact
     TransactionDTO toDto(Transaction s);
 
     @Named("walletId")
-    @BeanMapping(ignoreByDefault = true)
+//    @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     WalletDTO toDtoWalletId(Wallet wallet);
 }

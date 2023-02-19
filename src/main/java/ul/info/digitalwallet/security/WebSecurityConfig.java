@@ -65,7 +65,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                 .authorizeHttpRequests().requestMatchers("/h2-console","/h2-console/**").permitAll().and()
                 .authorizeHttpRequests().requestMatchers("/api/auth/**").permitAll().and()
                 .authorizeHttpRequests().requestMatchers("/api/test/**").permitAll().and()
-                .authorizeHttpRequests().requestMatchers("/**").permitAll()
+                .authorizeHttpRequests().requestMatchers("/api/currency/**").permitAll()
                 .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());

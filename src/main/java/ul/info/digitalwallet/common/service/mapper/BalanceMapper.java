@@ -18,12 +18,10 @@ public interface BalanceMapper extends EntityMapper<BalanceDTO, Balance> {
     BalanceDTO toDto(Balance s);
 
     @Named("currencyId")
-    @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     CurrencyDTO toDtoCurrencyId(Currency currency);
 
     @Named("walletId")
-    @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     WalletDTO toDtoWalletId(Wallet wallet);
 }

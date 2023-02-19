@@ -48,7 +48,7 @@ public interface WalletService {
      * @return the entity.
      */
     Optional<WalletDTO> findOne(Long id);
-    Optional<Wallet> findOne(User user);
+    WalletDTO findOne(User user);
     /**
      * Delete the "id" wallet.
      *

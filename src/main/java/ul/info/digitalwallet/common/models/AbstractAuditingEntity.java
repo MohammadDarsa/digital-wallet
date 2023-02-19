@@ -1,5 +1,6 @@
 package ul.info.digitalwallet.common.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -24,18 +25,22 @@ public abstract class AbstractAuditingEntity<T> implements Serializable {
 
     public abstract T getId();
 
+    @JsonIgnore
     @CreatedBy
     @Column(name = "created_by", length = 50, updatable = false)
     private String createdBy;
 
+    @JsonIgnore
     @CreatedDate
     @Column(name = "created_date", updatable = false)
     private Instant createdDate = Instant.now();
 
+    @JsonIgnore
     @LastModifiedBy
     @Column(name = "last_modified_by", length = 50)
     private String lastModifiedBy;
 
+    @JsonIgnore
     @LastModifiedDate
     @Column(name = "last_modified_date")
     private Instant lastModifiedDate = Instant.now();

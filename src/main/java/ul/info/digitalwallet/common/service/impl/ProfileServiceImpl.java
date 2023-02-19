@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ul.info.digitalwallet.common.exceptions.ProfileNotFoundException;
 import ul.info.digitalwallet.common.models.Profile;
 import ul.info.digitalwallet.common.models.User;
 import ul.info.digitalwallet.common.repository.ProfileRepository;
@@ -83,5 +84,11 @@ public class ProfileServiceImpl implements ProfileService {
     public void delete(Long id) {
         log.debug("Request to delete Profile : {}", id);
         profileRepository.deleteById(id);
+    }
+
+    @Override
+    public ProfileDTO findByUser(User user) {
+        log.debug("Request to get Profile of user: {}", user.getUsername());
+        return profileRepository.findByUser(user).map(profileMapper::toDto).orElseThrow(() -> new ProfileNotFoundException(user.getUsername()));
     }
 }

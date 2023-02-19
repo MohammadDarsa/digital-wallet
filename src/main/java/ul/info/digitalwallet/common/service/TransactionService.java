@@ -55,4 +55,6 @@ public interface TransactionService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<TransactionDTO> findAllByWalletId(Long id);
 }
