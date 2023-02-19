@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ul.info.digitalwallet.common.exceptions.BalanceAlreadyExistsException;
+import ul.info.digitalwallet.common.exceptions.BalanceNotFoundException;
 import ul.info.digitalwallet.common.exceptions.CurrencyNotFoundException;
 import ul.info.digitalwallet.common.exceptions.WalletNotFoundException;
 import ul.info.digitalwallet.common.models.Currency;
@@ -22,6 +23,7 @@ import ul.info.digitalwallet.common.service.mapper.BalanceMapper;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -45,7 +47,7 @@ public class BalanceServiceImpl implements BalanceService {
     @Override
     public BalanceDTO save(String isoCode, User user) {
         log.debug("Creating a new balance with currency {} for user {}.", isoCode, user.getUsername());
-        if(balanceRepository.existsByCurrency_IsoName(isoCode)) throw new BalanceAlreadyExistsException(isoCode, user.getUsername());
+        if(balanceRepository.existsByCurrency_IsoNameAndWallet_User(isoCode, user)) throw new BalanceAlreadyExistsException(isoCode, user.getUsername());
         Balance balance = new Balance();
         Wallet wallet = walletRepository.findByUser(user).orElseThrow(() -> new WalletNotFoundException(user.getUsername()));
         Currency currency = currencyRepository.findByIsoName(isoCode).orElseThrow(() -> new CurrencyNotFoundException(isoCode));
@@ -64,7 +66,7 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public Optional<BalanceDTO> partialUpdate(BalanceDTO balanceDTO) {
+    public BalanceDTO partialUpdate(BalanceDTO balanceDTO) {
         log.debug("Request to partially update Balance : {}", balanceDTO);
 
         return balanceRepository
@@ -75,7 +77,8 @@ public class BalanceServiceImpl implements BalanceService {
                 return existingBalance;
             })
             .map(balanceRepository::save)
-            .map(balanceMapper::toDto);
+            .map(balanceMapper::toDto)
+            .orElseThrow(BalanceNotFoundException::new);
     }
 
     @Override
@@ -102,5 +105,17 @@ public class BalanceServiceImpl implements BalanceService {
     public List<BalanceDTO> findByWalletId(Long id) {
         log.debug("Request to get all Balances for a wallet of id: {}", id);
         return balanceRepository.findByWallet_Id(id).stream().map(balanceMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    public Balance findBalanceByCurrencyAndUser(String currency, User user) {
+        log.info("Getting balance of user {} of currency {}", user.getUsername(), currency);
+        return balanceRepository.findByCurrency_IsoNameAndWallet_User(currency, user).orElseThrow(()->new BalanceNotFoundException(currency, user.getUsername()));
+    }
+
+    @Override
+    public Balance findBalanceByCurrencyAndReferenceId(String currency, String referenceId) {
+        log.info("Getting balance of wallet reference id {} of currency {}", referenceId, currency);
+        return balanceRepository.findByWallet_ReferenceIdAndCurrency_IsoName(UUID.fromString(referenceId), currency).orElseThrow(()->new BalanceNotFoundException(currency, referenceId));
     }
 }

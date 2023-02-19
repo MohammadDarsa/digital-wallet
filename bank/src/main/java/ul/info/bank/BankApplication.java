@@ -44,8 +44,8 @@ public class BankApplication {
 					connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/bank", "pepsi", "cola");
 					statement = connection.createStatement();
 					try {
-						statement.executeUpdate("INSERT INTO card( amount, created_at, currency, cvv, ex_date, pan, updated_at) VALUES (100,'2020-01-22','USD', '123', '2024-01-22', '1234123412341234' ,'2020-01-22')");
-						statement.executeUpdate("INSERT INTO card( amount, created_at, currency, cvv, ex_date, pan, updated_at) VALUES (100,'2020-01-22','USD', '123', '2024-01-22', '1234123412341233' ,'2020-01-22')");
+						statement.executeUpdate("INSERT INTO card( amount, created_at, currency, cvv, ex_date, pan, updated_at) VALUES (100000,'2020-01-22','USD', '123', '2024-01-22', '1111222233334444' ,'2020-01-22')");
+						statement.executeUpdate("INSERT INTO card( amount, created_at, currency, cvv, ex_date, pan, updated_at) VALUES (200000,'2020-01-22','LBP', '123', '2024-01-22', '1234123412341234' ,'2020-01-22')");
 					} catch (SQLException e) {
 						throw new RuntimeException(e);
 					}

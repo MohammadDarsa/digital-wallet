@@ -6,6 +6,7 @@ import ul.info.digitalwallet.common.models.User;
 import ul.info.digitalwallet.common.models.Wallet;
 
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Spring Data JPA repository for the Wallet entity.
@@ -14,5 +15,7 @@ import java.util.Optional;
 @Repository
 public interface WalletRepository extends JpaRepository<Wallet, Long> {
     Optional<Wallet> findByUser(User user);
+
+    Optional<Wallet> findByReferenceId(UUID referenceId);
 
 }

@@ -1,5 +1,6 @@
 package ul.info.digitalwallet.common.service.dto;
 
+import lombok.experimental.Accessors;
 import ul.info.digitalwallet.common.models.Balance;
 
 import java.io.Serializable;

@@ -33,7 +33,7 @@ public interface BalanceService {
      * @param balanceDTO the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<BalanceDTO> partialUpdate(BalanceDTO balanceDTO);
+    BalanceDTO partialUpdate(BalanceDTO balanceDTO);
 
     /**
      * Get all the balances.
@@ -58,4 +58,6 @@ public interface BalanceService {
     void delete(Long id);
 
     List<BalanceDTO> findByWalletId(Long id);
+    Balance findBalanceByCurrencyAndUser(String currency, User user);
+    Balance findBalanceByCurrencyAndReferenceId(String currency, String referenceId);
 }

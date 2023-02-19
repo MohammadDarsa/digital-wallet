@@ -93,9 +93,9 @@ public class AuthServiceImpl implements AuthService {
         user.setRoles(roles);
         User savedUser = userRepository.save(user);
 
-        walletService.save(user);
-        balanceService.save("USD", user);
-        profileService.save(new ProfileDTO(), user);
+        walletService.save(savedUser);
+        balanceService.save("USD", savedUser);
+        profileService.save(new ProfileDTO(), savedUser);
     }
 
     @Override

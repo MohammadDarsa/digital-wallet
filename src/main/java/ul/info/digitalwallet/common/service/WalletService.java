@@ -14,7 +14,7 @@ public interface WalletService {
     /**
      * Save a wallet.
      *
-     * @param walletDTO the entity to save.
+     * @param user the entity to save.
      */
     void save(User user);
 
@@ -49,6 +49,7 @@ public interface WalletService {
      */
     Optional<WalletDTO> findOne(Long id);
     WalletDTO findOne(User user);
+    WalletDTO findOne(String referenceId);
     /**
      * Delete the "id" wallet.
      *

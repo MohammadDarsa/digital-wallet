@@ -89,6 +89,12 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
+    public WalletDTO findOne(String referenceId) {
+        log.debug("Get wallet by referenceId");
+        return walletRepository.findByReferenceId(UUID.fromString(referenceId)).map(walletMapper::toDto).orElseThrow(() -> new WalletNotFoundException(""));
+    }
+
+    @Override
     public void delete(Long id) {
         log.debug("Request to delete Wallet : {}", id);
         walletRepository.deleteById(id);

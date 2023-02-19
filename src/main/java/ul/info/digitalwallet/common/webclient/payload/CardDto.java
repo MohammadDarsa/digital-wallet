@@ -1,4 +1,4 @@
-package ul.info.digitalwallet.common.service.webclient.payload;
+package ul.info.digitalwallet.common.webclient.payload;
 
 import lombok.Data;
 
