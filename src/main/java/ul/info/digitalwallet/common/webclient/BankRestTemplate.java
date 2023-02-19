@@ -26,12 +26,12 @@ public class BankRestTemplate {
                         .retrieve()
                 .bodyToMono(GetCardDetailsResponse.class).block();
     }
-    public BaseResponse<Double> addAmount(AddAmountRequest request){
+    public AddAmountResponse addAmount(AddAmountRequest request){
         return this.webClient.post().uri("/add-amount")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(Mono.just(request), AddAmountRequest.class)
                 .retrieve()
-                .bodyToMono(BaseResponse.class).block();
+                .bodyToMono(AddAmountResponse.class).block();
     }
     public BankBaseResponse transfer(TransferRequest request) {
         return this.webClient.post().uri("/transfer")
