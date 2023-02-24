@@ -21,3 +21,4 @@ alter table card
 INSERT INTO card(amount, created_at, currency, cvv, ex_date, pan, updated_at) VALUES (1000000,'2020-01-22','USD', '123', '2024-01-01', '1111222233334444' ,'2020-01-22');
 INSERT INTO card( amount, created_at, currency, cvv, ex_date, pan, updated_at) VALUES (2000000,'2020-01-22','LBP', '123', '2024-01-01', '1234123412341234' ,'2020-01-22');
 INSERT INTO card( amount, created_at, currency, cvv, ex_date, pan, updated_at) VALUES (2000000,'2020-01-22','USD', '123', '2024-01-01', '1122334455667788' ,'2020-01-22');
+INSERT INTO card( amount, created_at, currency, cvv, ex_date, pan, updated_at) VALUES (3000000,'2020-01-22','LBP', '123', '2024-01-01', '1212121212121212' ,'2020-01-22');
