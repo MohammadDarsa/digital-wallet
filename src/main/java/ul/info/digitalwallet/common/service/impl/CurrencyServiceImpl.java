@@ -1,12 +1,16 @@
 package ul.info.digitalwallet.common.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ul.info.digitalwallet.common.models.Currency;
+import ul.info.digitalwallet.common.models.User;
 import ul.info.digitalwallet.common.payload.request.AddCurrencyRequest;
+import ul.info.digitalwallet.common.payload.response.GetAllCurrenciesResponse;
 import ul.info.digitalwallet.common.repository.CurrencyRepository;
+import ul.info.digitalwallet.common.service.UserService;
 import ul.info.digitalwallet.common.service.dto.CurrencyDTO;
 import ul.info.digitalwallet.common.service.mapper.CurrencyMapper;
 import ul.info.digitalwallet.common.service.CurrencyService;
@@ -21,6 +25,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class CurrencyServiceImpl implements CurrencyService {
 
     private final Logger log = LoggerFactory.getLogger(CurrencyServiceImpl.class);
@@ -29,10 +34,8 @@ public class CurrencyServiceImpl implements CurrencyService {
 
     private final CurrencyMapper currencyMapper;
 
-    public CurrencyServiceImpl(CurrencyRepository currencyRepository, CurrencyMapper currencyMapper) {
-        this.currencyRepository = currencyRepository;
-        this.currencyMapper = currencyMapper;
-    }
+    private final UserService userService;
+
 
     @Override
     public CurrencyDTO save(AddCurrencyRequest request) {
@@ -84,5 +87,12 @@ public class CurrencyServiceImpl implements CurrencyService {
     public void delete(Long id) {
         log.debug("Request to delete Currency : {}", id);
         currencyRepository.deleteById(id);
+    }
+
+    @Override
+    public List<CurrencyDTO> findUserCurrencies() {
+        User user = userService.getAuthenticatedUser();
+        log.debug("Request to get all Currencies of user {}", user.getUsername());
+        return currencyRepository.findByBalances_Wallet_User(user).stream().map(currencyMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
     }
 }

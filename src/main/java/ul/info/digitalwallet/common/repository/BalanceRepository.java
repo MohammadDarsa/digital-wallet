@@ -3,6 +3,7 @@ package ul.info.digitalwallet.common.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ul.info.digitalwallet.common.models.Balance;
+import ul.info.digitalwallet.common.models.Currency;
 import ul.info.digitalwallet.common.models.User;
 import ul.info.digitalwallet.common.models.Wallet;
 

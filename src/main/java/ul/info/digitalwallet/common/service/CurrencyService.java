@@ -2,6 +2,7 @@ package ul.info.digitalwallet.common.service;
 
 import ul.info.digitalwallet.common.models.Currency;
 import ul.info.digitalwallet.common.payload.request.AddCurrencyRequest;
+import ul.info.digitalwallet.common.payload.response.GetAllCurrenciesResponse;
 import ul.info.digitalwallet.common.service.dto.CurrencyDTO;
 
 import java.util.List;
@@ -56,4 +57,6 @@ public interface CurrencyService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<CurrencyDTO> findUserCurrencies();
 }

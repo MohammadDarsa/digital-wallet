@@ -4,6 +4,7 @@ import ul.info.digitalwallet.common.models.Transaction;
 import ul.info.digitalwallet.common.models.enumeration.TransactionType;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -23,6 +24,8 @@ public class TransactionDTO implements Serializable {
     private String referenceId;
 
     private WalletDTO wallet;
+
+    private Instant createdDate;
 
     public Long getId() {
         return id;
@@ -104,5 +107,14 @@ public class TransactionDTO implements Serializable {
             ", referenceId='" + getReferenceId() + "'" +
             ", wallet=" + getWallet() +
             "}";
+    }
+
+    public Instant getCreatedDate() {
+        return createdDate;
+    }
+
+    public TransactionDTO setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
+        return this;
     }
 }
