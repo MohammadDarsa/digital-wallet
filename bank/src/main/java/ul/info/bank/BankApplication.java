@@ -13,7 +13,7 @@ public class BankApplication {
 		Statement statement = null;
 		Boolean b=false;
 		try {
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/", "pepsi", "cola");
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/bank", "pepsi", "cola");
 			statement = connection.createStatement();
 			try {
 				ResultSet resultSet = statement.executeQuery("select 1 from pg_database where datname = 'bank'");
