@@ -132,9 +132,9 @@ public class DigitalWalletServiceImpl implements DigitalWalletService {
         balanceDTOFrom.setAmount(amountFrom - request.getAmount());
         Double newAmount = balanceDTOFrom.getAmount();
         messageSubject.getObserver().setUser(user);
-        if(balanceDTOFrom.getCurrency().getIsoName().equals("USD") && newAmount<=500){
+        if(balanceFrom.getCurrency().getIsoName().equals("USD") && newAmount<=500){
             messageSubject.notify("Warning! You have "+newAmount+" $ only left in your balance");
-        }else if(balanceDTOFrom.getCurrency().getIsoName().equals("LBP") && newAmount<=3000000){
+        }else if(balanceFrom.getCurrency().getIsoName().equals("LBP") && newAmount<=3000000){
             messageSubject.notify("Warning! You have "+newAmount+" L.L only left in your balance");
         }
         balanceDTOFrom.setId(balanceFrom.getId());
