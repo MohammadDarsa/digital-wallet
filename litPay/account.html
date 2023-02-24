@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/account.css">
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/accuont.js" defer></script>
+
+    <title>My Account</title>
+</head>
+<body>
+
+
+
+    <script>
+        const token = getToken();
+        if(!token) window.location.href = "/login.html";
+    </script>
+
+    <div class="sidebar">
+        <img src="assets/img/Logo.svg" alt="" class="logo">
+        <div class="nav">
+            <div class="nav-item">
+                <img src="assets/img/home.svg" alt="" width="22px">
+                <a href="index.html"><span>Home</span></a>
+            </div>
+            <div class="nav-item">
+                <img src="assets/img/wallet.svg" alt="" width="22px">
+                <a href="wallet.html"><span>Wallets</span></a>
+            </div>
+            <div class="nav-item active">
+                <img src="assets/img/profile-active.svg" alt="" width="22px">
+                <a href="account.html"><span class="active-item">Account</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="page-heading">
+            <span class="overview-title">Profile</span>
+            <div class="page-heading-end">
+                <select name="currency" id="select-currency">
+                    <option value="usd">$ USD</option>
+                    <option value="lbp">LBP</option>
+                </select>
+                <img src="assets/img/profile.svg" alt="" class="profile-pic">
+            </div>
+        </div>
+        <div class="user-info">
+            <div class="user-info-detail">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="user-info-detail">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" required>
+            </div>
+            <div class="user-info-detail">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" required>
+            </div>
+            <div class="user-info-detail">
+                <label for="email">Email</label>
+                <input type="email" id="email" readonly value="test@gmail.com">
+            </div>
+            <div class="user-info-detail">
+                <label for="password">Password</label>
+                <input type="password" id="password" readonly value="test">
+            </div>
+            <button type="button" id="save-user-info" class="send-btn">Save</button>
+        </div>
+    </div>
+</body>
+<script>
+    const saveBtn = document.querySelector("#save-user-info");
+    let username, fname, lname, password, email;
+    saveBtn.addEventListener("click",()=>{
+        username = document.querySelector("#username").value;
+        fname = document.querySelector("#fname").value;
+        lname = document.querySelector("#lname").value;
+        email = document.querySelector("#email").value;
+        password = document.querySelector("#password").value;
+        //save in db
+    })
+</script>
+</html>

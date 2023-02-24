@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/script.js" defer></script>
+    <script src="assets/js/auth.js"></script>
+    <title>Home</title>
+</head>
+<body>
+
+    <script>
+        const token = getToken();
+        if(!token) window.location.href = "/login.html";
+    </script>
+
+    <div class="sidebar">
+        <img src="assets/img/Logo.svg" alt="" class="logo">
+        <div class="nav">
+            <div class="nav-item active">
+                <img src="assets/img/home-active.svg" alt="" width="22px">
+                <a href=""><span class="active-item">Home</span></a>
+            </div>
+            <div class="nav-item">
+                <img src="assets/img/wallet.svg" alt="" width="22px">
+                <a href="wallet.html"><span>Wallets</span></a>
+            </div>
+            <div class="nav-item">
+                <img src="assets/img/account.svg" alt="" width="22px">
+                <a href="account.html"><span>Account</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="page-heading">
+            <span class="overview-title">Overview</span>
+            <div class="page-heading-end">
+                <select name="currency" id="select-currency">
+                    <option value="USD">$ USD</option>
+                    <option value="LBP">LBP</option>
+                </select>
+                <img src="assets/img/profile.svg" alt="" class="profile-pic">
+            </div>
+        </div>
+        <div class="page-body">
+            <div class="page-body-col1">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Total Balance</span>
+                        <div class="line"></div>
+                        <span class="total-value"></span>
+                    </div>
+                </div>
+                <div class="credit-card">
+                    <img src="assets/img/logo2.svg" alt="" width="35px" class="logo2">
+                    <img src="assets/img/MasterCard.svg" alt="" width="35px" class="master-card">
+                    <span class="card-number">1234 9999 0000 7777</span>
+                    <span class="card-fname">Fatima</span>
+                    <span class="card-lname">Baher</span>
+                    <span class="card-month">05/</span>
+                    <span class="card-year">24</span>
+                </div>
+                <button class="change-wallet-btn">Change Wallet</button>
+            </div>
+            <div class="page-body-col2"><div class="graph">Graph Goes Here</div></div>
+            <div class="page-body-col3">
+                <div class="card card2">
+                    <div class="card-body">
+                        <span class="card-title">Credit Limit</span>
+                        <div class="line"></div>
+                        <span class="credit-limit"></span>
+                    </div>
+                </div>
+                <div class="card card2">
+                    <div class="card-body">
+                        <div class="income-title">
+                            <img src="assets/img/income.svg" alt="">
+                            <span class="card-title" style="font-size: 16px;">Income</span>
+                        </div>
+                        <span class="income"></span>
+                    </div>
+                </div>
+                <div class="card card2">
+                    <div class="card-body">
+                        <div class="income-title">
+                            <img src="assets/img/outcome.svg" alt="">
+                            <span class="card-title" style="font-size: 16px;">Expense</span>
+                        </div>
+                        <span class="outcome"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-tail">
+            <div class="transfer-field">
+                <span class="page-tail-title">Quick Transfer</span>
+                <form action="" class="transfer-form">
+                    <input type="text" class="transfer-accountNb" placeholder="Account number">
+                    <select name="" id="transfer-currency">
+                        <option value="USD" class="test">Currency $ USD</option>
+                        <option value="LBP">Currency L.L</option>
+                    </select>
+                    <div class="transfer-amount-field">
+                        <span class="amount-placeholder">Enter amount</span> <br>
+                        <div class="amount-input">
+                            <span>$</span>
+                            <input type="number" class="amount-value" value="1" min="1">
+                        </div>    
+                    </div>
+                    <div class="transfer-buttons">
+                        <button class="send-btn" type="button">Send Money</button>
+                        <button class="reset-btn" type="reset">Reset</button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <span class="page-tail-title transaction-title">Transactions</span>
+                <div class="table-field">
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
