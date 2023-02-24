@@ -4,4 +4,5 @@ import ul.info.digitalwallet.common.models.User;
 
 public interface UserService {
     User getAuthenticatedUser();
+
 }

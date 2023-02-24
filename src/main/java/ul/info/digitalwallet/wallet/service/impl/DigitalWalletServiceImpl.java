@@ -5,9 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ul.info.digitalwallet.common.exceptions.BaseException;
 import ul.info.digitalwallet.common.models.Balance;
+import ul.info.digitalwallet.common.models.Message;
 import ul.info.digitalwallet.common.models.User;
 import ul.info.digitalwallet.common.models.enumeration.TransactionType;
 import ul.info.digitalwallet.common.payload.response.BaseResponse;
+import ul.info.digitalwallet.common.repository.MessageRepository;
 import ul.info.digitalwallet.common.service.*;
 import ul.info.digitalwallet.common.service.dto.BalanceDTO;
 import ul.info.digitalwallet.common.service.dto.ProfileDTO;
@@ -25,6 +27,7 @@ import ul.info.digitalwallet.wallet.payload.response.GetWalletResponse;
 import ul.info.digitalwallet.wallet.payload.response.TopUpResponse;
 import ul.info.digitalwallet.wallet.payload.response.WalletTransferResponse;
 import ul.info.digitalwallet.wallet.service.DigitalWalletService;
+import ul.info.digitalwallet.wallet.service.observer.MessageSubject;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -47,6 +50,8 @@ public class DigitalWalletServiceImpl implements DigitalWalletService {
     private final BalanceService balanceService;
     private final BankRestTemplate restTemplate;
     private final WalletConstants walletConstants;
+
+    private final MessageSubject messageSubject;
 
     @Override
     public GetWalletResponse getWalletDetails() {
@@ -113,6 +118,7 @@ public class DigitalWalletServiceImpl implements DigitalWalletService {
     @Override
     public WalletTransferResponse transfer(WalletTransferRequest request) {
         User user = userService.getAuthenticatedUser();
+
         log.info("transfer from user {}, to wallet {}", user.getUsername(), request.getReferenceId());
         Balance balanceTo = balanceService.findBalanceByCurrencyAndReferenceId(request.getCurrency(), request.getReferenceId());
         Balance balanceFrom = balanceService.findBalanceByCurrencyAndUser(request.getCurrency(), user);
@@ -121,8 +127,16 @@ public class DigitalWalletServiceImpl implements DigitalWalletService {
         Double amountTo = balanceTo.getAmount();
         if(amountFrom - request.getAmount() < 0 || request.getAmount() < 0) throw new AmountInsufficientException(request.getAmount(), amountFrom);
 
+
         BalanceDTO balanceDTOFrom = new BalanceDTO();
         balanceDTOFrom.setAmount(amountFrom - request.getAmount());
+        Double newAmount = balanceDTOFrom.getAmount();
+        messageSubject.getObserver().setUser(user);
+        if(balanceDTOFrom.getCurrency().getIsoName().equals("USD") && newAmount<=500){
+            messageSubject.notify("Warning! You have "+newAmount+" $ only left in your balance");
+        }else if(balanceDTOFrom.getCurrency().getIsoName().equals("LBP") && newAmount<=3000000){
+            messageSubject.notify("Warning! You have "+newAmount+" L.L only left in your balance");
+        }
         balanceDTOFrom.setId(balanceFrom.getId());
 
         BalanceDTO balanceDTOTo = new BalanceDTO();
@@ -161,4 +175,6 @@ public class DigitalWalletServiceImpl implements DigitalWalletService {
             default -> walletConstants.getBankPanUsd();
         };
     }
+
+
 }
