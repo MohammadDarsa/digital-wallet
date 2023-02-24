@@ -17,11 +17,13 @@ import ul.info.digitalwallet.wallet.service.DigitalWalletService;
 
 import static ul.info.digitalwallet.common.payload.util.ResponseFactory.*;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/wallet")
 @RequiredArgsConstructor
 public class WalletController {
     private final DigitalWalletService walletService;
+
 
     @GetMapping("/get-wallet-details")
     public BaseResponse<GetWalletResponse> getWalletDetails() {

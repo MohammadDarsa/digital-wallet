@@ -3,6 +3,8 @@ package ul.info.digitalwallet.common.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
+import ul.info.digitalwallet.wallet.service.observer.Observer;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
