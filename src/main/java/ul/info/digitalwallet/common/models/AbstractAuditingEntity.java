@@ -15,6 +15,8 @@ import java.time.Instant;
 /**
  * Base abstract class for entities which will hold definitions for created, last modified, created by,
  * last modified by attributes.
+ * The id of the entity can be of any type, that's why it is generic, the implementation is done on the level of the inheriting class.
+ * For example: SQL entities use Long as id type, while MongoDB entities use String.
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
