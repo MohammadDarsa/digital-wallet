@@ -34,3 +34,29 @@ Follow the steps:
 
 For any further assistance please contact us, and we'll set a meeting to help you out :)
 
+## Available Data:
+
+To log in with an existing user use:
+- username: admin
+- password: admintest
+
+The reference ID of this user is: fb85f093-dc4c-4812-88e9-33b77ee9e0fc (this is used in money transfer)
+
+or 
+
+- username: admin2
+- password: admintest
+
+The reference ID of this user is: 43758877-503c-471e-be04-7611476ec11e (this is used in money transfer)
+
+To top up your wallet use the following card details:
+
+for USD currency:
+- pan: 1122334455667788
+- cvv: 123
+- expiry: 01/24
+
+for LBP currency:
+- pan: 1212121212121212
+- cvv: 123
+- expiry: 01/24
