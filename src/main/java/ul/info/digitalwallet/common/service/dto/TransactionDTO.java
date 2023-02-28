@@ -1,5 +1,6 @@
 package ul.info.digitalwallet.common.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ul.info.digitalwallet.common.models.Transaction;
 import ul.info.digitalwallet.common.models.enumeration.TransactionType;
 
@@ -25,6 +26,7 @@ public class TransactionDTO implements Serializable {
 
     private WalletDTO wallet;
 
+    @JsonProperty("createdDate")
     private Instant createdDate;
 
     public Long getId() {
@@ -113,8 +115,7 @@ public class TransactionDTO implements Serializable {
         return createdDate;
     }
 
-    public TransactionDTO setCreatedDate(Instant createdDate) {
+    public void setCreatedDate(Instant createdDate) {
         this.createdDate = createdDate;
-        return this;
     }
 }
