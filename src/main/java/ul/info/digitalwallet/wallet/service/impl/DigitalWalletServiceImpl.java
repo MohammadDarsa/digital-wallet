@@ -108,6 +108,7 @@ public class DigitalWalletServiceImpl implements DigitalWalletService {
         transaction.setType(TransactionType.TOPUP);
         transaction.setDescription("Top up from card with pan " + request.getPan() + " of currency " + request.getCurrency() + ".");
         transaction.setReferenceId(UUID.randomUUID().toString());
+        transaction.setCurrency(request.getCurrency());
         WalletDTO wallet = new WalletDTO();
         wallet.setId(balance.getWallet().getId());
         transaction.setWallet(wallet);
@@ -151,6 +152,7 @@ public class DigitalWalletServiceImpl implements DigitalWalletService {
         transactionIn.setType(TransactionType.TRANSFER_IN);
         transactionIn.setDescription("Transfer in of currency " + request.getCurrency() + " from wallet "+ balanceFrom.getWallet().getReferenceId() +".");
         transactionIn.setReferenceId(UUID.randomUUID().toString());
+        transactionIn.setCurrency(request.getCurrency());
         WalletDTO walletIn = new WalletDTO();
         walletIn.setId(balanceTo.getWallet().getId());
         transactionIn.setWallet(walletIn);
@@ -161,6 +163,7 @@ public class DigitalWalletServiceImpl implements DigitalWalletService {
         transactionOut.setType(TransactionType.TRANSFER_OUT);
         transactionOut.setDescription("Transfer out of currency " + request.getCurrency() + " to wallet "+ balanceTo.getWallet().getReferenceId() +".");
         transactionOut.setReferenceId(UUID.randomUUID().toString());
+        transactionOut.setCurrency(request.getCurrency());
         WalletDTO walletOut = new WalletDTO();
         walletOut.setId(balanceFrom.getWallet().getId());
         transactionOut.setWallet(walletOut);

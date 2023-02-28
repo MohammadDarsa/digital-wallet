@@ -160,7 +160,8 @@ create table transaction
     description        varchar(255),
     reference_id       varchar(255),
     type               varchar(255),
-    wallet_id          bigint
+    wallet_id          bigint,
+    currency           varchar(255)
         constraint fktfwlfspv2h4wcgc9rjd1658a6
             references wallet
 );
@@ -188,13 +189,13 @@ INSERT INTO public.balance (id, created_by, created_date, last_modified_by, last
 INSERT INTO public.balance (id, created_by, created_date, last_modified_by, last_modified_date, amount, currency_id, wallet_id) VALUES (2000, null, '2023-02-19 11:47:20.838522 +00:00', null, '2023-02-19 11:47:20.838522 +00:00', 550, 1000, 1000);
 INSERT INTO public.balance (id, created_by, created_date, last_modified_by, last_modified_date, amount, currency_id, wallet_id) VALUES (3000, null, '2023-02-19 16:22:28.908467 +00:00', null, '2023-02-19 16:22:28.908467 +00:00', 150, 1000, 2000);
 
-INSERT INTO public.profile (id, created_by, created_date, last_modified_by, last_modified_date, dob, first_name, gender, image_path, last_name, mobile_number, national_id, nationality, user_id) VALUES (1000, null, '2023-02-19 11:47:20.870885 +00:00', null, '2023-02-19 11:47:20.870885 +00:00', null, null, null, null, null, null, null, null, 1000);
-INSERT INTO public.profile (id, created_by, created_date, last_modified_by, last_modified_date, dob, first_name, gender, image_path, last_name, mobile_number, national_id, nationality, user_id) VALUES (2000, null, '2023-02-19 16:22:28.936863 +00:00', null, '2023-02-19 16:22:28.936863 +00:00', null, null, null, null, null, null, null, null, 2000);
+INSERT INTO public.profile (id, created_by, created_date, last_modified_by, last_modified_date, dob, first_name, gender, image_path, last_name, mobile_number, national_id, nationality, user_id) VALUES (1000, null, '2023-02-19 11:47:20.870885 +00:00', null, '2023-02-19 11:47:20.870885 +00:00', null, 'pepsi', null, null, 'cola', null, null, null, 1000);
+INSERT INTO public.profile (id, created_by, created_date, last_modified_by, last_modified_date, dob, first_name, gender, image_path, last_name, mobile_number, national_id, nationality, user_id) VALUES (2000, null, '2023-02-19 16:22:28.936863 +00:00', null, '2023-02-19 16:22:28.936863 +00:00', null, 'seven', null, null, 'up', null, null, null, 2000);
 
-INSERT INTO public.transaction (id, created_by, created_date, last_modified_by, last_modified_date, amount, description, reference_id, type, wallet_id) VALUES (1000, null, '2023-02-19 15:21:59.206962 +00:00', null, '2023-02-19 15:21:59.206962 +00:00', 100, 'Top up from card with pan 1122334455667788 of currency USD.', '71febb2e-69a2-4def-aa3f-8b79928f60a4', 'TOPUP', 1000);
-INSERT INTO public.transaction (id, created_by, created_date, last_modified_by, last_modified_date, amount, description, reference_id, type, wallet_id) VALUES (2000, null, '2023-02-19 16:23:10.436090 +00:00', null, '2023-02-19 16:23:10.436090 +00:00', 100, 'Top up from card with pan 1122334455667788 of currency USD.', 'de57a186-6cd3-4339-8c82-ac9625570c7b', 'TOPUP', 2000);
-INSERT INTO public.transaction (id, created_by, created_date, last_modified_by, last_modified_date, amount, description, reference_id, type, wallet_id) VALUES (3000, null, '2023-02-19 16:24:38.683497 +00:00', null, '2023-02-19 16:24:38.683497 +00:00', 50, 'Transfer in of currency USD from wallet fb85f093-dc4c-4812-88e9-33b77ee9e0fc.', 'e52b9714-6dd8-4047-abfc-4795a92c5014', 'TRANSFER_IN', 2000);
-INSERT INTO public.transaction (id, created_by, created_date, last_modified_by, last_modified_date, amount, description, reference_id, type, wallet_id) VALUES (4000, null, '2023-02-19 16:24:38.689944 +00:00', null, '2023-02-19 16:24:38.689944 +00:00', 50, 'Transfer out of currency USD to wallet 43758877-503c-471e-be04-7611476ec11e.', '30a6298a-69dd-4b26-9d79-1e20f057c11c', 'TRANSFER_OUT', 1000);
+INSERT INTO public.transaction (id, created_by, created_date, last_modified_by, last_modified_date, amount, description, reference_id, type, wallet_id) VALUES (1000, null, '2023-02-19 15:21:59.206962 +00:00', null, '2023-02-19 15:21:59.206962 +00:00', 100, 'Top up from card with pan 1122334455667788 of currency USD.', '71febb2e-69a2-4def-aa3f-8b79928f60a4', 'TOPUP', 1000, 'USD');
+INSERT INTO public.transaction (id, created_by, created_date, last_modified_by, last_modified_date, amount, description, reference_id, type, wallet_id) VALUES (2000, null, '2023-02-19 16:23:10.436090 +00:00', null, '2023-02-19 16:23:10.436090 +00:00', 100, 'Top up from card with pan 1122334455667788 of currency USD.', 'de57a186-6cd3-4339-8c82-ac9625570c7b', 'TOPUP', 2000, 'USD');
+INSERT INTO public.transaction (id, created_by, created_date, last_modified_by, last_modified_date, amount, description, reference_id, type, wallet_id) VALUES (3000, null, '2023-02-19 16:24:38.683497 +00:00', null, '2023-02-19 16:24:38.683497 +00:00', 50, 'Transfer in of currency USD from wallet fb85f093-dc4c-4812-88e9-33b77ee9e0fc.', 'e52b9714-6dd8-4047-abfc-4795a92c5014', 'TRANSFER_IN', 2000, 'USD');
+INSERT INTO public.transaction (id, created_by, created_date, last_modified_by, last_modified_date, amount, description, reference_id, type, wallet_id) VALUES (4000, null, '2023-02-19 16:24:38.689944 +00:00', null, '2023-02-19 16:24:38.689944 +00:00', 50, 'Transfer out of currency USD to wallet 43758877-503c-471e-be04-7611476ec11e.', '30a6298a-69dd-4b26-9d79-1e20f057c11c', 'TRANSFER_OUT', 1000, 'USD');
 
 
 

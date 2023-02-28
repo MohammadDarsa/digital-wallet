@@ -39,6 +39,9 @@ public class Transaction extends AbstractAuditingEntity<Long> implements Seriali
     @JsonIgnoreProperties(value = { "user", "cards", "balances", "transactions" }, allowSetters = true)
     private Wallet wallet;
 
+    @Column(name = "currency")
+    private String currency;
+
 
     public Long getId() {
         return this.id;
@@ -147,5 +150,13 @@ public class Transaction extends AbstractAuditingEntity<Long> implements Seriali
             ", description='" + getDescription() + "'" +
             ", referenceId='" + getReferenceId() + "'" +
             "}";
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

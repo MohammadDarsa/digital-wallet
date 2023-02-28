@@ -26,6 +26,16 @@ public class TransactionDTO implements Serializable {
 
     private WalletDTO wallet;
 
+    private String currency;
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     @JsonProperty("createdDate")
     private Instant createdDate;
 

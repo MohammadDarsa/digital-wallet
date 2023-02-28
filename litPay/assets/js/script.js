@@ -23,7 +23,7 @@ currencyList.addEventListener("change", ()=>{
 //defining functions
 
 function changeSymbol(){
-    currencySymbol = currentCurrency =="USD"? "$" : "L.L";
+    currencySymbol = currentCurrency ==="USD"? "$" : "L.L";
 }
 async function getData(){
     let result = await sendRequestGet("/wallet/get-wallet-details");
@@ -37,11 +37,30 @@ async function init(){
     
 }
 
+function filterTransactions(transactions) {
+    console.log(transactions)
+    return transactions.filter(transaction => transaction.currency === currentCurrency);
+}
+
+// <img src="assets/img/logo2.svg" alt="" width="35px" className="logo2">
+//     <img src="assets/img/MasterCard.svg" alt="" width="35px" className="master-card">
+//         <span className="card-number">1234 9999 0000 7777</span>
+//         <span className="card-fname">Fatima</span>
+//         <span className="card-lname">Baher</span>
+//         <span className="card-month">05/</span>
+//         <span className="card-year">24</span>
+function updateCard() {
+    document.querySelector(".card-number").innerHTML = data.wallet.referenceId;
+    document.querySelector(".card-fname").innerHTML = data.profile.firstName;
+    document.querySelector(".card-lname").innerHTML = data.profile.lastName;
+}
+
 function renderUI(){
+    updateCard();
     total.innerHTML = currencySymbol + " "+ getTotal(); 
     limit.innerHTML = currencySymbol +" " +25000;
     getTransactions();
-    fillTransactions(getFormattedTrans(transactions));
+    fillTransactions(getFormattedTrans(filterTransactions(transactions)));
     getIncomeOutcome();
     income.innerHTML = currencySymbol + " " + incomeVal;
     outcome.innerHTML = currencySymbol + " " + outcomeVal;
@@ -55,7 +74,8 @@ function getTransactions(){
             "date": transaction.createdDate.split("T")[0],
             "name": transaction.description,
             "type": transaction.type,
-            "value": transaction.amount
+            "value": transaction.amount,
+            "currency": transaction.currency
         }
     });
  
@@ -65,9 +85,9 @@ function getFormattedTrans(transactions){ //combined by dates
     let newTrans = {};
     for(let transaction of transactions){
         if(transaction.date in newTrans){
-            newTrans[transaction.date].push({"name":transaction.name, "type": transaction.type, "value": transaction.value});
+            newTrans[transaction.date].push({"name":transaction.name, "type": transaction.type, "value": transaction.value, "currency": transaction.currency});
         }else{
-            newTrans[transaction.date]=[{"name":transaction.name, "type": transaction.type, "value": transaction.value}];
+            newTrans[transaction.date]=[{"name":transaction.name, "type": transaction.type, "value": transaction.value, "currency": transaction.currency}];
         }
     }
     return newTrans;
@@ -76,7 +96,7 @@ function getFormattedTrans(transactions){ //combined by dates
 function getTotal(){
     let balances = data.balances;
     for(let balance of balances){
-        if(balance.currency.isoName==currentCurrency){
+        if(balance.currency.isoName===currentCurrency){
 
             return balance.amount;
         }
@@ -91,12 +111,14 @@ function getLimit(){
 }
 
 function getIncomeOutcome(){
+    outcomeVal = 0;
+    incomeVal = 0;
     for(let transaction of transactions){
         console.log(transaction)
-        if(transaction.type == "TRANSFER_OUT"){
+        if(transaction.type === "TRANSFER_OUT" && transaction.currency === currentCurrency){
             outcomeVal += transaction.value;
         }   
-        else{
+        else if (transaction.type === "TRANSFER_IN" && transaction.currency === currentCurrency){
             incomeVal += transaction.value;
         }
     }
@@ -105,7 +127,7 @@ function getIncomeOutcome(){
 
 function createTable(dateKey, transactions){
     let date = document.createElement("span");
-    date.classList.add("date");
+    date.classList.add("transactions-date");
     date.innerHTML = dateKey;
     tableField.appendChild(date);
     let table = document.createElement("table");
@@ -119,10 +141,10 @@ function createTable(dateKey, transactions){
                                 <span class="transaction-name">`+element.name+`</span>
                                 <span class="date2">`+dateKey+`</span>
                             </div>`;
-        let imgName = element.type == "TRANSFER_OUT" ? "transaction-outcome.svg" : "transaction-income.svg";
+        let imgName = element.type === "TRANSFER_OUT" ? "transaction-outcome.svg" : "transaction-income.svg";
         iconTd.innerHTML =  `<img src="../assets/img/${imgName}" alt="" width="30px">`
         iconTd.classList.add("right-cell");
-        let operator = element.type == "TRANSFER_OUT" ? "-" : "+";
+        let operator = element.type === "TRANSFER_OUT" ? "-" : "+";
         let value = element.value > 0 ? element.value : -1 * element.value;
         valueTd.innerHTML = `<span class="transaction-type">`+operator+`</span>
                              <span class="transaction-currency">`+currencySymbol+`</span>
@@ -135,10 +157,20 @@ function createTable(dateKey, transactions){
     }
     table.appendChild(tbody);
     table.classList.add("transactions-table");
-    tableField.appendChild(table);
+    tableField.append(table);
 }
+
+function removeElementsByClass(className){
+    const elements = document.getElementsByClassName(className);
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+}
+
 function fillTransactions(transactions){
-    for(let key in transactions){      
+    removeElementsByClass("transactions-table");
+    removeElementsByClass("transactions-date");
+    for(let key in transactions){
         createTable(key,transactions);       
     }
 }
