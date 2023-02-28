@@ -16,8 +16,9 @@ const setFormOpen = (bool) => {
 
 const fillBalances = async () => {
     const data = await getBalances();
+    const currenciesData = await getCurrencies();
     if(!data) alert("error")
-    const currencies = data.response.balances.map(balance => balance.currency.isoName);
+    const currencies = currenciesData.response.currencies.map(currency => currency.isoName);
     wrapper.innerHTML = '';
     for(let i = 0 ; i < currencies.length; i++) {
         let currencyI = currencies[i];
@@ -53,6 +54,10 @@ const getBalances = async () => {
     return res;
 }
 
+const getCurrencies = async () => {
+    const res = await sendRequestGet("/currency/get-all-currencies");
+    return res;
+}
 
 fillBalances();
 
