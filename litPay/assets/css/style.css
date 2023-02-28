@@ -17,6 +17,7 @@ body{
     background-color: #FAFBFC;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     border-right: 1px solid #01B8E3;
     padding: 27px 0;
@@ -34,7 +35,7 @@ input:focus{
 .nav{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-content: center;
 }
 
 .nav-item{
@@ -412,4 +413,10 @@ tr{
 .table-field{
     max-height: 200px;
     overflow: auto;
+}
+
+.nav-pages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }

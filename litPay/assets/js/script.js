@@ -118,7 +118,7 @@ function getIncomeOutcome(){
         if(transaction.type === "TRANSFER_OUT" && transaction.currency === currentCurrency){
             outcomeVal += transaction.value;
         }   
-        else if (transaction.type === "TRANSFER_IN" && transaction.currency === currentCurrency){
+        else if (transaction.currency === currentCurrency){
             incomeVal += transaction.value;
         }
     }
