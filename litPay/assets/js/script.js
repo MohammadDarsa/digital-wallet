@@ -1,15 +1,15 @@
 //defining variables
 
 const total = document.querySelector(".total-value");
-const limit = document.querySelector(".credit-limit");
 const income = document.querySelector(".income");
 const outcome = document.querySelector(".outcome");
 const tableBody = document.querySelector("tbody");
 const currencyList = document.querySelector("#select-currency");
 const tableField = document.querySelector(".table-field");
+let messagesContainer = document.querySelector(".messages-popup__list");
 let currentCurrency = currencyList.value;
 let currencySymbol;
-let data, transactions, incomeVal=0, outcomeVal=0;
+let data,messages, transactions, incomeVal=0, outcomeVal=0;
 
 //adding event listeners
 
@@ -21,6 +21,25 @@ currencyList.addEventListener("change", ()=>{
 })
 
 //defining functions
+
+
+async function getMessages(){
+    let msgResult = await sendRequestGet("/messages");
+    messages = msgResult;
+}
+
+async function fillMessages(){
+    await getMessages();
+    messagesContainer.innerHTML="";
+    messages.forEach(element=>{
+        let newLI = document.createElement("li");
+        newLI.innerHTML = "<b>"+element["sender"] +": </b>"+ element["messageBody"];
+        if(messagesContainer.childNodes.length==0)
+            messagesContainer.appendChild(newLI);
+        else
+            messagesContainer.insertBefore(newLI, messagesContainer.childNodes[0]);
+    })
+}
 
 function changeSymbol(){
     currencySymbol = currentCurrency ==="USD"? "$" : "L.L";
@@ -34,12 +53,13 @@ async function init(){
     await getData();
     changeSymbol();    
     renderUI();
+    fillMessages();
     
 }
 
 function filterTransactions(transactions) {
-    console.log(transactions)
-    return transactions.filter(transaction => transaction.currency === currentCurrency);
+    return transactions;
+    // return transactions.filter(transaction => transaction.currency === currentCurrency);
 }
 
 // <img src="assets/img/logo2.svg" alt="" width="35px" className="logo2">
@@ -58,20 +78,19 @@ function updateCard() {
 function renderUI(){
     updateCard();
     total.innerHTML = currencySymbol + " "+ getTotal(); 
-    limit.innerHTML = currencySymbol +" " +25000;
     getTransactions();
+    console.log(filterTransactions(transactions))
     fillTransactions(getFormattedTrans(filterTransactions(transactions)));
     getIncomeOutcome();
     income.innerHTML = currencySymbol + " " + incomeVal;
     outcome.innerHTML = currencySymbol + " " + outcomeVal;
-
 }
 
 let array=[{"date": "2020-1-23", "name": "Dunkin Donuts", "type": "outcome", "value": -19.5}, {"date": "2023-2-2", "name": "Dunkin Donuts", "type": "outcome", "value": -20},{"date": "2020-1-23", "name": "salary", "type": "itcome", "value": 100}]
 function getTransactions(){
     transactions = data.transactions.map(transaction => {
         return {
-            "date": transaction.createdDate.split("T")[0],
+            "date": transaction.createdDate?.split("T")[0],
             "name": transaction.description,
             "type": transaction.type,
             "value": transaction.amount,
@@ -103,12 +122,6 @@ function getTotal(){
     }
 }
 
-
-function getLimit(){
-    fetch("assets/data.json")
-    .then(res=>res.json())
-    .then(res=>limit.innerHTML= "$" + res.limit);
-}
 
 function getIncomeOutcome(){
     outcomeVal = 0;

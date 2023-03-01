@@ -100,8 +100,7 @@ a{
 }
 
 .profile-pic{
-    width: 40px;
-    border-radius: 50%;
+    width: 20px;
 }
 
 .page-heading-body{
@@ -114,7 +113,7 @@ a{
     gap: 18px;
     width: 100%;
     justify-content: space-between;
-    height: 330px;
+    height: 275px;
 }
 
 .page-body-col1{
@@ -197,7 +196,7 @@ a{
 }
 
 .card2{
-    height: 90px;
+    height: 120px;
 }
 
 .graph{
@@ -420,3 +419,45 @@ tr{
     flex-direction: column;
     gap: 10px;
 }
+
+
+/* popup */
+.page-heading-end{
+    position: relative;
+}
+.page-heading-end .notification-trigger:hover .messages-popup-container{
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+}
+.messages-popup-container{
+    position: absolute;
+    right: 0;
+    top: 120%;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #3C7AE4;
+    padding: 14px;
+    width: 500px;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: .3s;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.messages-popup__title{
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #0C2E6760
+}
+
+ul.messages-popup__list{
+    padding: 0;
+    list-style-type: none;
+}
+
+ul.messages-popup__list li{
+    margin-bottom: 13px;
+}
+

@@ -3,6 +3,8 @@ const addBalanceBtn = document.querySelector('#addBalanceBtn');
 const addBalanceForm = document.querySelector('.addBalanceForm');
 const submitBalanceForm = document.querySelector('#submitBalanceForm');
 const dropDown = document.querySelector('.currency-dropdown');
+let messagesContainer = document.querySelector(".messages-popup__list");
+let messages;
 
 
 
@@ -60,7 +62,7 @@ const getCurrencies = async () => {
 }
 
 fillBalances();
-
+fillMessages();
 
 
 addBalanceBtn.addEventListener('click', () => {
@@ -80,6 +82,25 @@ submitBalanceForm.addEventListener("click", async () => {
     fillBalances();
     addBalanceBtn.click();
 });
+
+async function getMessages(){
+    let msgResult = await sendRequestGet("/messages");
+    messages = msgResult;
+}
+
+async function fillMessages(){
+    await getMessages();
+    messagesContainer.innerHTML="";
+    messages.forEach(element=>{
+
+        let newLI = document.createElement("li");
+        newLI.innerHTML = "<b>"+element["sender"] +": </b>"+ element["messageBody"];
+        if(messagesContainer.childNodes.length==0)
+            messagesContainer.appendChild(newLI);
+        else
+            messagesContainer.insertBefore(newLI, messagesContainer.childNodes[0]);
+    })
+}
 
 
 

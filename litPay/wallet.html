@@ -18,19 +18,27 @@
         </script>
 
         <div class="sidebar">
-            <img src="assets/img/Logo.svg" alt="" class="logo" />
             <div class="nav">
-                <div class="nav-item">
-                    <img src="assets/img/home.svg" alt="" width="22px" />
-                    <a href="index.html"><span >Home</span></a>
+                <img src="assets/img/Logo.svg" alt="" class="logo">
+                <div class="nav-pages">
+                    <div class="nav-item">
+                        <img src="assets/img/home.svg" alt="" width="22px">
+                        <a href="index.html"><span >Home</span></a>
+                    </div>
+                    <div class="nav-item active">
+                        <img src="assets/img/wallet-active.svg" alt="" width="22px">
+                        <a href="wallet.html"><span class="active-item">Wallets</span></a>
+                    </div>
+                    <div class="nav-item">
+                        <img src="assets/img/account.svg" alt="" width="22px">
+                        <a href="account.html"><span>Account</span></a>
+                    </div>
                 </div>
-                <div class="nav-item active">
-                    <img src="assets/img/wallet-active.svg" alt="" width="22px" />
-                    <a href="wallet.html"><span class="active-item">Wallets</span></a>
-                </div>
+            </div>
+            <div class="nav-pages">
                 <div class="nav-item">
-                    <img src="assets/img/account.svg" alt="" width="22px" />
-                    <a href=""><span>Account</span></a>
+                    <img src="assets/img/logout-icon.svg" alt="" width="22px">
+                    <a href="login.html"><span>Logout</span></a>
                 </div>
             </div>
         </div>
@@ -42,11 +50,17 @@
                         <option value="USD">$ USD</option>
                         <option value="LBP">LBP</option>
                     </select>
-                    <img
-                        src="assets/img/profile.svg"
-                        alt=""
-                        class="profile-pic"
-                    />
+                    <div class="notification-trigger">
+                        <img src="assets/img/notification.svg" alt="" class="profile-pic">
+                        <!-- messages popup -->
+                        <div class="messages-popup-container">
+                            <div class="messages-popup__title">
+                                Latest Notification
+                            </div>
+                            <ul class="messages-popup__list">                    
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
