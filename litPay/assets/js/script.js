@@ -28,6 +28,8 @@ async function getMessages(){
     messages = msgResult;
 }
 
+
+
 async function fillMessages(){
     await getMessages();
     messagesContainer.innerHTML="";
@@ -49,8 +51,21 @@ async function getData(){
     data = result.response;
 }
 
+function populateDropdown(currList){
+    const headerDropdown = document.querySelector("#select-currency");
+    const transferDropdown = document.querySelector("#transfer-currency");
+    for(let i = 0 ; i < currList.length ; i++){
+        const curr = currList[i].isoName;
+        headerDropdown.innerHTML += `<option value="${curr}">${curr}</option>`;
+        transferDropdown.innerHTML += `<option value="${curr}">${curr}</option>`;
+    }
+}
+
+
 async function init(){
     await getData();
+    const currencies = await getUserCurrencies();
+    populateDropdown(currencies.response.currencies)
     changeSymbol();    
     renderUI();
     fillMessages();
@@ -186,6 +201,11 @@ function fillTransactions(transactions){
     for(let key in transactions){
         createTable(key,transactions);       
     }
+}
+
+const getUserCurrencies = async () => {
+    const res = await sendRequestGet("/currency/get-user-currencies");
+    return res;
 }
 
 // Quick transfer

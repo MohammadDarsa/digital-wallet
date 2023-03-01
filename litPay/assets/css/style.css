@@ -285,7 +285,7 @@ a{
     margin-top: 10px;
 }
 
-.transfer-accountNb{
+.transfer-accountNb, .topupIn{
     background-color: #FAFBFC;
     border: 1px solid #A4B4CB;
     border-radius: 8px;
@@ -296,7 +296,11 @@ a{
     color: #A4B4CB;
 }
 
-#transfer-currency{
+.topupIn::placeholder{
+    color: #A4B4CB;
+}
+
+#transfer-currency, #topup-currency{
     background-color: transparent;
     border: 1px solid #A4B4CB;
     border-radius: 8px;
@@ -306,6 +310,10 @@ a{
 
 
 #transfer-currency:focus{
+    outline: none;
+}
+
+#topup-currency:focus{
     outline: none;
 }
 
@@ -339,7 +347,7 @@ a{
     gap: 10px;
 }
 
-.send-btn{
+.send-btn, .ok-btn{
     padding: 7px 14px;
     background: linear-gradient(to right, #3E79E5, #01B8E3);
     border: 0;
@@ -461,3 +469,13 @@ ul.messages-popup__list li{
     margin-bottom: 13px;
 }
 
+
+/*topup field*/
+
+.topup-field{
+    
+    position: absolute;
+    top: 0;
+    right: 0;
+
+}
