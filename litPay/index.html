@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <script src="./assets/js/script.js" defer></script>
     <script src="./assets/js/auth.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <title>Home</title>
 </head>
 <body>
@@ -81,7 +86,11 @@
                     <span class="card-year">24</span>
                 </div>
             </div>
-            <div class="page-body-col2"><div class="graph">Graph Goes Here</div></div>
+            <div class="page-body-col2">
+                <figure class="highcharts-figure">
+                    <div id="container"></div>
+                </figure>
+            </div>
             <div class="page-body-col3">
                 <div class="card card2">
                     <div class="card-body">
@@ -126,7 +135,7 @@
                 </form>
             </div>
             <div>
-                <span class="page-tail-title transaction-title">Transactions</span>
+                <div class="page-tail-title transaction-title">Transactions</div>
                 <div class="table-field">
                 </div>
                 
