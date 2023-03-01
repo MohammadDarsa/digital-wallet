@@ -10,6 +10,7 @@ import ul.info.digitalwallet.common.service.TransactionService;
 import ul.info.digitalwallet.common.service.dto.TransactionDTO;
 import ul.info.digitalwallet.common.service.mapper.TransactionMapper;
 
+import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +38,7 @@ public class TransactionServiceImpl implements TransactionService {
     public TransactionDTO save(TransactionDTO transactionDTO) {
         log.debug("Request to save Transaction : {}", transactionDTO);
         Transaction transaction = transactionMapper.toEntity(transactionDTO);
+        transaction.setCreatedDate(Instant.now());
         transaction = transactionRepository.save(transaction);
         return transactionMapper.toDto(transaction);
     }
