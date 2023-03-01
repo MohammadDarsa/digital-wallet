@@ -43,6 +43,7 @@ input[type="submit"]:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    width: 40vw;
 }
 
 
@@ -89,4 +90,8 @@ input[type="submit"]:hover {
     display: none;
     gap: 10px;
     align-items: center;
+}
+
+#addBalanceBtn{
+    margin-bottom: 10px;
 }
