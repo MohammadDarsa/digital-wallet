@@ -46,7 +46,7 @@
                     });
                     if(res.status == "SUCCESS"){
                         setToken(res.response.accessToken)
-                        window.location.href = "/litPay";
+                        window.location.href = "/";
                     }
                     else{
                         alert("Error signing in: "+ res.message)

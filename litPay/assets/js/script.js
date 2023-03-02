@@ -9,7 +9,7 @@ const tableField = document.querySelector(".table-field");
 let messagesContainer = document.querySelector(".messages-popup__list");
 let currentCurrency = currencyList.value;
 let currencySymbol;
-let data,messages, transactions, incomeVal=0, outcomeVal=0;
+let data,messages, transactions, incomeVal=0, outcomeVal=0, transactionsIn, transactionsOut, startDate;
 
 //adding event listeners
 
@@ -36,7 +36,7 @@ async function fillMessages(){
     messages.forEach(element=>{
         let newLI = document.createElement("li");
         newLI.innerHTML = "<b>"+element["sender"] +": </b>"+ element["messageBody"];
-        if(messagesContainer.childNodes.length==0)
+        if(messagesContainer.childNodes.length===0)
             messagesContainer.appendChild(newLI);
         else
             messagesContainer.insertBefore(newLI, messagesContainer.childNodes[0]);
@@ -68,13 +68,104 @@ async function init(){
     populateDropdown(currencies.response.currencies)
     changeSymbol();    
     renderUI();
-    fillMessages();
-    
+    await fillMessages();
+}
+
+function getTransactionsInAndOut() {
+    transactionsIn = [0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0];
+    transactionsOut = [0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0];
+
+    filterTransactions(transactions).forEach(transaction => {
+        if (transaction.type === "TRANSFER_IN" || transaction.type === "TOPUP") {
+            console.log("hello");
+            console.log(parseInt(transaction.date.split("-")[1])-1);
+            console.log(transaction.value)
+            transactionsIn[parseInt(transaction.date.split("-")[1])-1] += transaction.value;
+        } else {
+            console.log("hello");
+            transactionsOut[parseInt(transaction.date.split("-")[1])-1] += transaction.value;
+        }
+    });
+
+    console.log(transactionsIn);
+    console.log(transactionsOut);
+}
+
+function renderChart() {
+    Highcharts.chart('container', {
+
+        chart: {
+            type: 'column'
+        },
+
+        title: {
+            text: '',
+            align: 'left'
+        },
+
+
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Amount in ' + currencySymbol
+            }
+        },
+
+        xAxis: {
+            categories: [
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec'
+            ],
+            crosshair: true
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'bottom'
+        },
+
+        series: [{
+            name: 'In',
+            data: transactionsIn
+        },
+            {
+                name: 'Out',
+                data: transactionsOut
+            },
+        ],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
 }
 
 function filterTransactions(transactions) {
-    return transactions;
-    // return transactions.filter(transaction => transaction.currency === currentCurrency);
+    // return transactions;
+    return transactions.filter(transaction => transaction.currency === currentCurrency);
 }
 
 // <img src="assets/img/logo2.svg" alt="" width="35px" className="logo2">
@@ -94,11 +185,14 @@ function renderUI(){
     updateCard();
     total.innerHTML = currencySymbol + " "+ getTotal(); 
     getTransactions();
+    getTransactionsInAndOut();
     console.log(filterTransactions(transactions))
     fillTransactions(getFormattedTrans(filterTransactions(transactions)));
     getIncomeOutcome();
     income.innerHTML = currencySymbol + " " + incomeVal;
     outcome.innerHTML = currencySymbol + " " + outcomeVal;
+    renderChart();
+
 }
 
 let array=[{"date": "2020-1-23", "name": "Dunkin Donuts", "type": "outcome", "value": -19.5}, {"date": "2023-2-2", "name": "Dunkin Donuts", "type": "outcome", "value": -20},{"date": "2020-1-23", "name": "salary", "type": "itcome", "value": 100}]
