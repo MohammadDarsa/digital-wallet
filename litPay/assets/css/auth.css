@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    background-image: url("../img/login-bg.svg");
+    background-size: cover;
+    min-height: 100vh;
+    overflow: hidden;
+}
+form {
+    background-color: #ffffff07;
+    backdrop-filter: blur(20px);
+    border-radius: 5px;
+    padding: 35px;
+    width: 300px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+img.logo {
+    width: 220px;
+    margin-bottom: 50px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 22px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font: 18px sans-serif;
+    color: #444;
+}
+input{
+    border-radius: 8px;
+}
+input:focus{
+    outline: none;
+}
+input::placeholder{
+    opacity: .5;
+}
+
+input[type="submit"] {
+    background: linear-gradient(90deg, #3E79E5, #01B8E3);
+    color: #fff;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    font: 18px sans-serif;
+    font-weight: bold;
+}
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+.mute{
+    opacity: .3;
+    font-size: 14px;
+}
+
+a{
+    all: unset;
+    cursor: pointer;
+}

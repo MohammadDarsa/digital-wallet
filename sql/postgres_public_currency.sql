@@ -1,0 +1,2 @@
+INSERT INTO public.currency (id, created_by, created_date, last_modified_by, last_modified_date, exchange_value, image_path, iso_name) VALUES (252, null, '2023-02-19 10:59:12.807653 +00:00', null, '2023-02-19 10:59:12.807653 +00:00', 1, '', 'USD');
+INSERT INTO public.currency (id, created_by, created_date, last_modified_by, last_modified_date, exchange_value, image_path, iso_name) VALUES (253, null, '2023-02-19 10:59:29.982281 +00:00', null, '2023-02-19 10:59:29.982281 +00:00', 80000, '', 'LBP');

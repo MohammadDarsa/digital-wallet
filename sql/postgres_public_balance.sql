@@ -1,0 +1,3 @@
+INSERT INTO public.balance (id, created_by, created_date, last_modified_by, last_modified_date, amount, currency_id, wallet_id) VALUES (52, null, '2023-02-19 12:52:52.777824 +00:00', null, '2023-02-19 12:52:52.777824 +00:00', 0, 253, 202);
+INSERT INTO public.balance (id, created_by, created_date, last_modified_by, last_modified_date, amount, currency_id, wallet_id) VALUES (2, null, '2023-02-19 11:47:20.838522 +00:00', null, '2023-02-19 11:47:20.838522 +00:00', 550, 252, 202);
+INSERT INTO public.balance (id, created_by, created_date, last_modified_by, last_modified_date, amount, currency_id, wallet_id) VALUES (102, null, '2023-02-19 16:22:28.908467 +00:00', null, '2023-02-19 16:22:28.908467 +00:00', 150, 252, 352);

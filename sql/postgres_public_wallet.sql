@@ -1,0 +1,2 @@
+INSERT INTO public.wallet (id, created_by, created_date, last_modified_by, last_modified_date, reference_id, user_id) VALUES (202, null, '2023-02-19 11:47:20.823006 +00:00', null, '2023-02-19 11:47:20.823006 +00:00', 'fb85f093-dc4c-4812-88e9-33b77ee9e0fc', 4);
+INSERT INTO public.wallet (id, created_by, created_date, last_modified_by, last_modified_date, reference_id, user_id) VALUES (352, null, '2023-02-19 16:22:28.887155 +00:00', null, '2023-02-19 16:22:28.887155 +00:00', '43758877-503c-471e-be04-7611476ec11e', 7);

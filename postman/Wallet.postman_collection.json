@@ -1,0 +1,1174 @@
+{
+	"info": {
+		"_postman_id": "7ac75d66-77ff-4fbd-bdea-91f17096cc0a",
+		"name": "Wallet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17744251"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "sign up",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin2\",\r\n    \"email\": \"admin2@mail.com\",\r\n    \"password\": \"admintest\",\r\n    \"role\": [\r\n        \"admin\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/auth/sign-up",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('token', pm.response.json().response['accessToken'])"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin2\",\r\n    \"password\": \"admintest\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/auth/sign-in",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "sign in",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"admin2\",\r\n    \"password\": \"admintest\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/auth/sign-in",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"auth",
+										"sign-in"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 21:54:21 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"SUCCESS\",\n    \"code\": \"0\",\n    \"message\": \"Success\",\n    \"response\": {\n        \"id\": 7,\n        \"username\": \"admin2\",\n        \"email\": \"admin2@mail.com\",\n        \"roles\": [\n            \"ROLE_ADMIN\"\n        ],\n        \"accessToken\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjIiLCJpYXQiOjE2NzcyNzU2NjEsImV4cCI6MTY3NzM2MjA2MX0.W6X7OXekEs09ZAPK9rZ_Q6q6F6xe4cXltH1D5jNIrjCvIpp8Dua-9BsXvkTWz7DX-at1TrPRwIuUronCXrCh7A\",\n        \"tokenType\": \"Bearer\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "currency",
+			"item": [
+				{
+					"name": "Add Currency",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isoName\":\"EUR\",\r\n    \"exchangeValue\":1.1,\r\n    \"imagePath\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/currency/add-currency",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"currency",
+								"add-currency"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Currency",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isoName\":\"EUR\",\r\n    \"exchangeValue\":1.1,\r\n    \"imagePath\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/currency/add-currency",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"currency",
+										"add-currency"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 21:54:38 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"SUCCESS\",\n    \"code\": \"0\",\n    \"message\": \"Success\",\n    \"response\": {\n        \"id\": 1,\n        \"isoName\": \"EUR\",\n        \"exchangeValue\": 1.1,\n        \"imagePath\": \"\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Currencies",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isoName\":\"EUR\",\r\n    \"exchangeValue\":1.1,\r\n    \"imagePath\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/currency/get-all-currencies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"currency",
+								"get-all-currencies"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Currencies",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isoName\":\"EUR\",\r\n    \"exchangeValue\":1.1,\r\n    \"imagePath\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/currency/get-all-currencies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"currency",
+										"get-all-currencies"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 21:54:40 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"SUCCESS\",\n    \"code\": \"0\",\n    \"message\": \"Success\",\n    \"response\": {\n        \"currencies\": [\n            {\n                \"id\": 252,\n                \"isoName\": \"USD\",\n                \"exchangeValue\": 1,\n                \"imagePath\": \"\"\n            },\n            {\n                \"id\": 253,\n                \"isoName\": \"LBP\",\n                \"exchangeValue\": 80000,\n                \"imagePath\": \"\"\n            },\n            {\n                \"id\": 1,\n                \"isoName\": \"EUR\",\n                \"exchangeValue\": 1.1,\n                \"imagePath\": \"\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User Currencies",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isoName\":\"EUR\",\r\n    \"exchangeValue\":1.1,\r\n    \"imagePath\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/currency/get-user-currencies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"currency",
+								"get-user-currencies"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get User Currencies",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isoName\":\"EUR\",\r\n    \"exchangeValue\":1.1,\r\n    \"imagePath\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/currency/get-user-currencies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"currency",
+										"get-user-currencies"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 21:54:42 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"SUCCESS\",\n    \"code\": \"0\",\n    \"message\": \"Success\",\n    \"response\": {\n        \"currencies\": [\n            {\n                \"id\": 252,\n                \"isoName\": \"USD\",\n                \"exchangeValue\": 1,\n                \"imagePath\": \"\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "wallet",
+			"item": [
+				{
+					"name": "get wallet details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/wallet/get-wallet-details",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"wallet",
+								"get-wallet-details"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get wallet details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/wallet/get-wallet-details",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"wallet",
+										"get-wallet-details"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 21:55:17 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"SUCCESS\",\n    \"code\": \"0\",\n    \"message\": \"Success\",\n    \"response\": {\n        \"wallet\": {\n            \"id\": 352,\n            \"referenceId\": \"43758877-503c-471e-be04-7611476ec11e\",\n            \"user\": {\n                \"id\": 7,\n                \"username\": \"admin2\",\n                \"email\": \"admin2@mail.com\",\n                \"roles\": [\n                    {\n                        \"id\": 3,\n                        \"name\": \"ROLE_ADMIN\"\n                    }\n                ]\n            }\n        },\n        \"balances\": [\n            {\n                \"id\": 102,\n                \"amount\": 150,\n                \"currency\": {\n                    \"id\": 252,\n                    \"isoName\": \"USD\",\n                    \"exchangeValue\": 1,\n                    \"imagePath\": \"\"\n                },\n                \"wallet\": {\n                    \"id\": 352,\n                    \"referenceId\": \"43758877-503c-471e-be04-7611476ec11e\",\n                    \"user\": {\n                        \"id\": 7,\n                        \"username\": \"admin2\",\n                        \"email\": \"admin2@mail.com\",\n                        \"roles\": [\n                            {\n                                \"id\": 3,\n                                \"name\": \"ROLE_ADMIN\"\n                            }\n                        ]\n                    }\n                }\n            }\n        ],\n        \"transactions\": [\n            {\n                \"id\": 52,\n                \"amount\": 100,\n                \"type\": \"TOPUP\",\n                \"description\": \"Top up from card with pan 1122334455667788 of currency USD.\",\n                \"referenceId\": \"de57a186-6cd3-4339-8c82-ac9625570c7b\",\n                \"wallet\": {\n                    \"id\": 352,\n                    \"referenceId\": \"43758877-503c-471e-be04-7611476ec11e\",\n                    \"user\": {\n                        \"id\": 7,\n                        \"username\": \"admin2\",\n                        \"email\": \"admin2@mail.com\",\n                        \"roles\": [\n                            {\n                                \"id\": 3,\n                                \"name\": \"ROLE_ADMIN\"\n                            }\n                        ]\n                    }\n                },\n                \"createdDate\": \"2023-02-19T16:23:10.436090Z\"\n            },\n            {\n                \"id\": 53,\n                \"amount\": 50,\n                \"type\": \"TRANSFER_IN\",\n                \"description\": \"Transfer in of currency USD from wallet fb85f093-dc4c-4812-88e9-33b77ee9e0fc.\",\n                \"referenceId\": \"e52b9714-6dd8-4047-abfc-4795a92c5014\",\n                \"wallet\": {\n                    \"id\": 352,\n                    \"referenceId\": \"43758877-503c-471e-be04-7611476ec11e\",\n                    \"user\": {\n                        \"id\": 7,\n                        \"username\": \"admin2\",\n                        \"email\": \"admin2@mail.com\",\n                        \"roles\": [\n                            {\n                                \"id\": 3,\n                                \"name\": \"ROLE_ADMIN\"\n                            }\n                        ]\n                    }\n                },\n                \"createdDate\": \"2023-02-19T16:24:38.683497Z\"\n            }\n        ],\n        \"profile\": {\n            \"id\": 52,\n            \"firstName\": \"hello\",\n            \"lastName\": \"ahlan\",\n            \"dob\": null,\n            \"nationalId\": null,\n            \"nationality\": null,\n            \"gender\": null,\n            \"mobileNumber\": null,\n            \"imagePath\": null\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "add balance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currency\":\"EUR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/wallet/create-new-balance",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"wallet",
+								"create-new-balance"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "add balance",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"currency\":\"EUR\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/wallet/create-new-balance",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"wallet",
+										"create-new-balance"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 21:56:02 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"SUCCESS\",\n    \"code\": \"0\",\n    \"message\": \"Success\",\n    \"response\": {\n        \"balance\": {\n            \"id\": 1,\n            \"amount\": 0,\n            \"currency\": {\n                \"id\": 1,\n                \"isoName\": \"EUR\",\n                \"exchangeValue\": 1.1,\n                \"imagePath\": \"\"\n            },\n            \"wallet\": {\n                \"id\": 352,\n                \"referenceId\": \"43758877-503c-471e-be04-7611476ec11e\",\n                \"user\": {\n                    \"id\": 7,\n                    \"username\": \"admin2\",\n                    \"email\": \"admin2@mail.com\",\n                    \"roles\": [\n                        {\n                            \"id\": 3,\n                            \"name\": \"ROLE_ADMIN\"\n                        }\n                    ]\n                }\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "top up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currency\":\"USD\",\r\n    \"cvv\":\"123\",\r\n    \"exp\":\"24/01\",\r\n    \"pan\":\"1122334455667788\",\r\n    \"amount\":100.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/wallet/top-up",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"wallet",
+								"top-up"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "top up",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"currency\":\"USD\",\r\n    \"cvv\":\"123\",\r\n    \"exp\":\"24/01\",\r\n    \"pan\":\"1122334455667788\",\r\n    \"amount\":100.00\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/wallet/top-up",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"wallet",
+										"top-up"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 22:02:53 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"SUCCESS\",\n    \"code\": \"0\",\n    \"message\": \"Success\",\n    \"response\": {\n        \"balance\": {\n            \"id\": 102,\n            \"amount\": 250,\n            \"currency\": {\n                \"id\": 252,\n                \"isoName\": \"USD\",\n                \"exchangeValue\": 1,\n                \"imagePath\": \"\"\n            },\n            \"wallet\": {\n                \"id\": 352,\n                \"referenceId\": \"43758877-503c-471e-be04-7611476ec11e\",\n                \"user\": {\n                    \"id\": 7,\n                    \"username\": \"admin2\",\n                    \"email\": \"admin2@mail.com\",\n                    \"roles\": [\n                        {\n                            \"id\": 3,\n                            \"name\": \"ROLE_ADMIN\"\n                        }\n                    ]\n                }\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "transfer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currency\":\"USD\",\r\n    \"referenceId\":\"43758877-503c-471e-be04-7611476ec11e\",\r\n    \"amount\":50.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/wallet/transfer",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"wallet",
+								"transfer"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "transfer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"currency\":\"USD\",\r\n    \"referenceId\":\"43758877-503c-471e-be04-7611476ec11e\",\r\n    \"amount\":50.00\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/wallet/transfer",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"wallet",
+										"transfer"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 22:03:07 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"SUCCESS\",\n    \"code\": \"0\",\n    \"message\": \"Success\",\n    \"response\": {\n        \"balance\": {\n            \"id\": 102,\n            \"amount\": 250,\n            \"currency\": {\n                \"id\": 252,\n                \"isoName\": \"USD\",\n                \"exchangeValue\": 1,\n                \"imagePath\": \"\"\n            },\n            \"wallet\": {\n                \"id\": 352,\n                \"referenceId\": \"43758877-503c-471e-be04-7611476ec11e\",\n                \"user\": {\n                    \"id\": 7,\n                    \"username\": \"admin2\",\n                    \"email\": \"admin2@mail.com\",\n                    \"roles\": [\n                        {\n                            \"id\": 3,\n                            \"name\": \"ROLE_ADMIN\"\n                        }\n                    ]\n                }\n            }\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"hello\",\r\n    \"lastName\": \"ahlan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/profile/update-profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"profile",
+								"update-profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Profile",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"hello\",\r\n    \"lastName\": \"ahlan\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/profile/update-profile",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"profile",
+										"update-profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Feb 2023 21:55:11 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"SUCCESS\",\n    \"code\": \"0\",\n    \"message\": \"Success\",\n    \"response\": {\n        \"id\": 52,\n        \"firstName\": \"hello\",\n        \"lastName\": \"ahlan\",\n        \"dob\": null,\n        \"nationalId\": null,\n        \"nationality\": null,\n        \"gender\": null,\n        \"mobileNumber\": null,\n        \"imagePath\": null\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8080/api",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
