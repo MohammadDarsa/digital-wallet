@@ -1,6 +1,6 @@
 # digital-wallet
 
-Basic digital wallet made using spring boot and thymleaf.
+Basic digital wallet made using spring boot and basic html/css/js.
 
 ## Requirements
 
@@ -8,53 +8,55 @@ For building and running the application you need:
 
 - [JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 - [Gradle 7.0+](https://services.gradle.org/distributions/gradle-7.6-bin.zip)
+- [Intellij IDEA](https://www.jetbrains.com/idea/download/#section=windows)
+- [Postgres](https://www.postgresql.org/download/)
+- [Git Bash](https://git-scm.com/downloads)
 
-Both of them will be downloaded and configured automatically if you're using intellij to run the project, so you don't have to worry :P
+All of them except postgres will be downloaded and configured automatically if you're using intellij to run the project, so you don't have to worry :P
 
-## Running the application locally
+## Postgres Setup
 
-Before running the application you must set up a postgres database instance
+Download the postgres engine from [here](https://www.postgresql.org/download/).
+This will run postgres on port 5432.
+make sure to memorize the password you set for the postgres user as it will be used in the shell script later.
 
-### Postgres setup
+## Source Code Setup
 
-You can do this in 2 ways:
+Before running the application you must set up a postgres database instance and open the project from intellij once.
+Please clone this [repository](https://github.com/MohammadDarsa/digital-wallet) and open it in intellij.
 
-The first one is to download the postgres engine from [here](https://www.postgresql.org/download/).
-This will run postgres on port 5432. If you use this method make sure to set the username to `pepsi` and password to `cola`, or you can change the username and password from `application.properties`
+## Running The Application
 
-**(Recommended but requires more RAM)**
-The second way is to download and run [docker](https://www.docker.com/products/docker-desktop/), then use the command line to run
-`docker/docker-compose-postgres.yml`.
+Follow the steps:
 
-in cmd run from the project directory:
+1. Open a new git bash session and navigate to the project directory (using cd command).
+2. run `sh ./run.sh` command from the git bash session.
 
-```shell
-docker-compose -f .\docker\docker-compose-postgres.yml up
-```
+For any further assistance please contact us, and we'll set a meeting to help you out :)
 
-This will do the same thing as the first method, but using docker. This is more handy.
+## Available Data:
 
-### Spring profiles
+To log in with an existing user use:
+- username: admin
+- password: admintest
 
-Profiles are a way to manage different spring configurations, in our case we have 2 different configurations
+The reference ID of this user is: fb85f093-dc4c-4812-88e9-33b77ee9e0fc (this is used in money transfer)
 
-- local: creates an in memory database (without postgres), good for testing.
-- dev: uses the postgres database.
+or 
 
-To switch between profiles go to `src/main/resources/application.properties`
-and change `spring.profiles.active` to whatever profile you want to set active.
+- username: admin2
+- password: admintest
 
-### Running the application
+The reference ID of this user is: 43758877-503c-471e-be04-7611476ec11e (this is used in money transfer)
 
-There are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `ul.info.digitalwallet.DigitalWalletApplication` class from your IDE.
+To top up your wallet use the following card details:
 
-Alternatively you can use the [Spring Boot Gradle plugin](https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/) like so:
+for USD currency:
+- pan: 1122334455667788
+- cvv: 123
+- expiry: 01/24
 
-```shell
-./gradlew bootRun
-```
-
-After running the application make sure to execute the script `roles.sql` present in the sql directory, this will add the roles for authorization. Make sure to select the right database.
-
-### Bank Backend
-The bank is ready, you can run it on port 8081 by just running the application. No APIs are called from the bank yet.
+for LBP currency:
+- pan: 1212121212121212
+- cvv: 123
+- expiry: 01/24

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="assets/css/style.css" />
+        <link rel="stylesheet" href="assets/css/wallets.css" />
+        <script src="assets/js/auth.js"></script>
+        <title>Home</title>
+        <script src="./assets/js/wallets.js" defer></script>
+    </head>
+    <body>
+
+        <script>
+            const token = getToken();
+            if(!token) window.location.href = "/login.html";
+        </script>
+
+        <div class="sidebar">
+            <div class="nav">
+                <img src="assets/img/Logo.svg" alt="" class="logo">
+                <div class="nav-pages">
+                    <div class="nav-item">
+                        <img src="assets/img/home.svg" alt="" width="22px">
+                        <a href="index.html"><span >Home</span></a>
+                    </div>
+                    <div class="nav-item active">
+                        <img src="assets/img/wallet-active.svg" alt="" width="22px">
+                        <a href="wallet.html"><span class="active-item">Wallets</span></a>
+                    </div>
+                    <div class="nav-item">
+                        <img src="assets/img/account.svg" alt="" width="22px">
+                        <a href="account.html"><span>Account</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-pages">
+                <div class="nav-item">
+                    <img src="assets/img/logout-icon.svg" alt="" width="22px">
+                    <a href="login.html"><span>Logout</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="page-heading">
+                <span class="overview-title">All Curencies</span>
+                <div class="page-heading-end">
+                    <select name="currency" id="select-currency">
+                        <option value="USD">$ USD</option>
+                        <option value="LBP">LBP</option>
+                    </select>
+                    <div class="notification-trigger">
+                        <img src="assets/img/notification.svg" alt="" class="profile-pic">
+                        <!-- messages popup -->
+                        <div class="messages-popup-container">
+                            <div class="messages-popup__title">
+                                Latest Notification
+                            </div>
+                            <ul class="messages-popup__list">                    
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper-body" style="position: relative;">
+                <button class="gradient-btn" id="addBalanceBtn">Add Balance</button>
+
+                <form class="addBalanceForm">
+                    <select class="currency-dropdown">
+                    </select>
+
+                    <button type="button" class="gradient-btn" id="submitBalanceForm">Create</button>
+                </form>
+
+                <div class="balances-list"></div>
+                <div class="topup-field">
+                    <span class="page-tail-title">TopUp</span>
+                    <form action="" class="transfer-form">
+                        <input type="text" class="topupIn cvv" placeholder="CVV">
+                        <input type="text" class="topupIn pan" placeholder="PAN">
+                        <input type="date" class="topupIn exp" placeholder="EXP">
+                        <select name="" id="topup-currency">
+                            <option value="USD" class="test">Currency $ USD</option>
+                            <option value="LBP">Currency L.L</option>
+                        </select>
+                        <div class="transfer-amount-field">
+                            <span class="amount-placeholder">Enter amount</span> <br>
+                            <div class="amount-input">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" class="amount-value" value="1" min="1">
+                            </div>    
+                        </div>
+                        <div class="transfer-buttons">
+                            <button class="ok-btn" type="button">OK</button>
+                            <button class="reset-btn" type="reset">Reset</button>
+                        </div>
+                    </form>
+                </div>
+    
+            </div>
+        </div>
+       
+    </body>
+</html>

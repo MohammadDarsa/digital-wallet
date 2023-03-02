@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Form</title>
+        <link rel="stylesheet" href="assets/css/auth.css">
+        <script src="./assets/js/auth.js"></script>
+    </head>
+    <body>
+        <form>
+            <img src="assets/img/logo.png" alt="LOGO" class="logo">
+            <input type="text" id="username" name="username" placeholder="Username" required />
+            <input type="text" id="fname" name="fname" placeholder="First Name" required />
+            <input type="text" id="lname" name="lname" placeholder="Last Name" required />
+            <input type="text" id="email" name="email" placeholder="Email" required />
+            <input type="password" id="password" name="password" placeholder="Password" required />
+            <input type="submit" value="Signup"/>
+            <span class="mute">Have an account?<a href="login.html"><u>Login</u></a></span>
+        </form>
+    </body>
+
+
+    <!-- Temporary -->
+    
+        <script>
+            const form = document.querySelector('form');
+            let username, fname, lname, password, email;
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                username = document.querySelector("#username").value;
+                fname = document.querySelector("#fname").value;
+                lname = document.querySelector("#lname").value;
+                email = document.querySelector("#email").value;
+                password = document.querySelector("#password").value;
+                role=["admin"];
+                const res = await sendRequestPost("/auth/sign-up", {
+                    username,
+                    email,
+                    password,
+                    role
+                });
+                if(res.status == "SUCCESS"){
+                    setToken(res.response.accessToken)
+                    const res = await sendRequestPost("/auth/sign-in", {
+                    username,
+                    password
+                    });
+                    if(res.status == "SUCCESS"){
+                        setToken(res.response.accessToken)
+                        window.location.href = "/";
+                    }
+                    else{
+                        alert("Error signing in: "+ res.message)
+                    }
+                    }
+                else{
+                    alert("Error signing up: "+ res.message)
+                }
+
+
+            })
+        </script>
+
+    <!-- Temporary -->
+
+
+</html>

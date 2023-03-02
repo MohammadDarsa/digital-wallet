@@ -64,7 +64,8 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests().requestMatchers("/h2-console","/h2-console/**").permitAll().and()
                 .authorizeHttpRequests().requestMatchers("/api/auth/**").permitAll().and()
-                .authorizeHttpRequests().requestMatchers("/api/test/**").permitAll()
+                .authorizeHttpRequests().requestMatchers("/api/test/**").permitAll().and()
+                .authorizeHttpRequests().requestMatchers("/api/currency/**").permitAll()
                 .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());
